@@ -2,7 +2,12 @@
 const fs = require('fs'),
   path = require('path');
 const A = require('../assets/analyzer.js');
-const spec = JSON.parse(fs.readFileSync(path.join(__dirname, '../КОИ/Проект /rules_and_test_cases_v1.json'), 'utf8'));
+const specPath = path.join(__dirname, '../КОИ/Проект /rules_and_test_cases_v1.json');
+if (!fs.existsSync(specPath)) {
+  console.log('Официальные кейсы КОИ: пропущены (локальный набор не включён в репозиторий)');
+  process.exit(0);
+}
+const spec = JSON.parse(fs.readFileSync(specPath, 'utf8'));
 const id = {
   C1_DIRECT_IDENTIFIERS: 'C1',
   C2_INDIRECT_IDENTIFICATION: 'C2',
