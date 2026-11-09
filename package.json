@@ -1,0 +1,26 @@
+{
+ "name": "bezopasnyj-prompt",
+ "version": "1.7.0",
+ "private": true,
+ "license": "MIT",
+ "description": "Проверка запросов к ИИ на персональные данные (в браузере)",
+ "scripts": {
+  "test": "node tests/all.js",
+  "check": "for f in assets/*.js sw.js tools/*.js tests/*.js; do node --check \"$f\" || exit 1; done",
+  "start": "node tools/serve.js",
+  "test:dom": "node tests/dom.js",
+  "format": "prettier --write assets/*.js sw.js tools/*.js tests/*.js",
+  "format:check": "prettier --check assets/*.js sw.js tools/*.js tests/*.js",
+  "test:all": "npm test && npm run test:dom",
+  "build": "node tools/build-rules.js && node tools/build.js",
+  "build:rules": "node tools/build-rules.js",
+  "release-check": "node tools/release-check.js"
+ },
+ "engines": {
+  "node": ">=18"
+ },
+ "devDependencies": {
+  "jsdom": "^26.1.0",
+  "prettier": "^3.9.10"
+ }
+}

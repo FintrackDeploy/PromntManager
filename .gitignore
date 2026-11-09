@@ -1,0 +1,20 @@
+# Dependencies and generated site build
+node_modules/
+dist/
+
+# Local editor and agent tooling
+.idea/
+.agents/
+.claude/
+.taste-skill/
+skills-lock.json
+
+# Internal project documents, not part of the public application
+/КОИ/
+
+# Local machine files and secrets
+.DS_Store
+.env
+.env.*
+!.env.example
+*.log

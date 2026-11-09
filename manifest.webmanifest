@@ -1,0 +1,38 @@
+{
+ "name": "Безопасный промпт",
+ "short_name": "Безопасный промпт",
+ "description": "Проверка запросов к ИИ на персональные данные",
+ "lang": "ru",
+ "start_url": ".",
+ "scope": ".",
+ "display": "standalone",
+ "background_color": "#102A56",
+ "theme_color": "#102A56",
+ "icons": [
+  {
+   "src": "assets/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "assets/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "assets/icon-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  },
+  {
+   "src": "assets/icon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml",
+   "purpose": "any"
+  }
+ ],
+ "id": "./"
+}

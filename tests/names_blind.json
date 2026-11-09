@@ -1,0 +1,183 @@
+[
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Помоги написать характеристику: Рустам Гасанов, 8Б, часто конфликтует, мать одна воспитывает троих",
+  "name": "Гасанов"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Софье Лебедевой из 4 класса поставили диагноз СДВГ, как с ней работать",
+  "name": "Лебедев"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Напиши родителям Богдана Шевченко (7А) письмо о долгах по оплате питания",
+  "name": "Шевченко"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Ксюша из нашего 9В вчера порезала руки, классная руководитель Ирина Павловна в курсе",
+  "name": "Ксюш"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Дамир Каримов, ученик 5 класса школы 9 г. Витебска, живёт на Правды 14",
+  "name": "Каримов"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Отец Артёма Белого из 6Б сидит в колонии, мальчик замкнулся",
+  "name": "Белого"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Не могу дозвониться до Виолетты, её номер 29 777 88 99",
+  "name": "Виолетт"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Паша Мельников из 10А сказал, что не хочет жить",
+  "name": "Мельников"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Юле Зайцевой нужна справка из поликлиники, у неё эпилепсия",
+  "name": "Зайцев"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Мария Ивановна Кравец, учитель математики школы 3, поставила мне 2",
+  "name": "Кравец"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Составь тест по теме «Вера и разум в эпоху Просвещения» для 11 класса"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Как объяснить детям, что такое любовь и дружба? Подготовь беседу"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Предложи игры для сплочения коллектива 6 класса"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Напиши сценарий праздника «Прощание с Азбукой» для первоклассников"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Подбери задачи про Пифагора и Евклида для урока геометрии"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Расскажи, чем знаменит Фёдор Достоевский, для урока литературы"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Объясни разницу между мнением и фактом для 7 класса"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Сделай план занятия по теме «Безопасность в интернете» для 9 класса"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Составь кроссворд по географии Беларуси: Минск, Гродно, Брест"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Мария, Иван и Пётр купили 12 тетрадей. Составь 5 задач по этому условию"
+ },
+ {
+  "lang": "be",
+  "flag": true,
+  "text": "Вучань Цімох Руднеў з 6 «А» ліцэя 3 у Віцебску часта хварэе, мама адна гадуе траіх",
+  "name": "Руднеў"
+ },
+ {
+  "lang": "be",
+  "flag": true,
+  "text": "Настаўніца Лідзія Паўлаўна Шышко паставіла Максіму Крывому двойку",
+  "name": "Шышко"
+ },
+ {
+  "lang": "be",
+  "flag": true,
+  "text": "Мой нумар 8 044 555 66 77, перадай Ганне Жук",
+  "name": "Жук"
+ },
+ {
+  "lang": "be",
+  "flag": false,
+  "text": "Складзі план урока па творы Якуба Коласа «Новая зямля» для 8 класа"
+ },
+ {
+  "lang": "be",
+  "flag": false,
+  "text": "Як развіваць крытычнае мысленне ў вучняў 9 класа? Дай парады"
+ },
+ {
+  "lang": "be",
+  "flag": false,
+  "text": "Растлумач, што такое мясцовы час, для 7 класа"
+ },
+ {
+  "lang": "en",
+  "flag": true,
+  "text": "My student Daniel Brown, 13, is being bullied at school 8 in Gomel, his parents are divorced",
+  "name": "Brown"
+ },
+ {
+  "lang": "en",
+  "flag": true,
+  "text": "Please draft a letter to Mrs. Elena Kovalenko about her son Artem from 7B, who has asthma",
+  "name": "Kovalenko"
+ },
+ {
+  "lang": "en",
+  "flag": true,
+  "text": "Reach me at alex.morgan@outlook.com, my phone is +375 29 765 43 21"
+ },
+ {
+  "lang": "en",
+  "flag": true,
+  "text": "Sophie from grade 9 told me she wants to kill herself",
+  "name": "Sophie"
+ },
+ {
+  "lang": "en",
+  "flag": false,
+  "text": "Give me ideas for a science fair project for grade 8"
+ },
+ {
+  "lang": "en",
+  "flag": false,
+  "text": "Summarize the plot of Romeo and Juliet in five sentences"
+ },
+ {
+  "lang": "en",
+  "flag": false,
+  "text": "How should teachers talk to parents about screen time? General tips"
+ }
+]

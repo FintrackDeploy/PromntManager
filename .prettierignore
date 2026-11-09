@@ -1,0 +1,6 @@
+assets/rules.js
+assets/vendor/
+assets/ner/
+assets/fonts/
+node_modules/
+package-lock.json

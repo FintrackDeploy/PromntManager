@@ -1,0 +1,299 @@
+[
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Диме из 6 «В» поставили двойку по алгебре, мама не отвечает на звонки",
+  "name": "Диме"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "У Кости из 8А проблемы с поведением, что посоветуешь?",
+  "name": "Кости"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Жене Сидоровой из 5Б трудно даётся чтение",
+  "name": "Сидоров"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Саша Новиков, 9 лет, не хочет ходить в школу",
+  "name": "Новиков"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Лёша обидел Тёму на перемене, оба из 4 класса гимназии 12",
+  "name": "Лёша"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Мирослава Ковалёва из 7 класса пропустила месяц, у неё астма",
+  "name": "Ковалёв"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Позвони Эльмире Рахимовой, телефон 8 033 111 22 33",
+  "name": "Эльмир"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Сидоров из 9Б снова не выполнил задание, отец пьёт",
+  "name": "Сидоров"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Кравчук Д. опоздал на урок, родители в разводе",
+  "name": "Кравчук"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "позвони ване, он живёт в Бресте на Московской 12",
+  "name": "ване"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Тимур Алиев из 10 класса лицея 1 г. Минска состоит на учёте в ИДН",
+  "name": "Алиев"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Мстислав Горбач, 2012 года рождения, ученик 5 класса, диагноз ДЦП",
+  "name": "Горбач"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Айгуль Нурматова из 3В часто плачет, в семье конфликты",
+  "name": "Нурматов"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Моя дочь Устинья учится в 2А школы 7 в Могилёве и плохо спит",
+  "name": "УстиньЯ"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Захар и Матвей из 6Г подрались, мама Захара работает в милиции",
+  "name": "Захар"
+ },
+ {
+  "lang": "ru",
+  "flag": true,
+  "text": "Мне написала Ульяна Громова, ученица 11 класса, что хочет уйти из жизни",
+  "name": "Громов"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Надежда на лучшее помогает подросткам справляться со стрессом, объясни почему"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Вера в себя и любовь к чтению: составь памятку для 7 класса"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Разбери роман «Война и мир» Толстого для 10 класса"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Платон и Аристотель: сравни их взгляды для урока философии"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Составь план урока по повести «Анна Каренина»"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Расскажи про Марию Склодовскую-Кюри для 8 класса"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Что такое кости и суставы? Подготовь тест для 5 класса"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Составь задания про месяцы: март, август, ноябрь"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Как ухаживать за розой и лилией на школьном участке?"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Придумай квест для классного часа про дружбу и доверие"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Составь план родительского собрания о безопасности в интернете"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Объясни тему «Дроби» для 5 класса простыми словами"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Подготовь памятку для родителей о режиме дня первоклассника"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Что делать, если ученик отказывается отвечать у доски? Общие советы"
+ },
+ {
+  "lang": "ru",
+  "flag": false,
+  "text": "Кто такие Ломоносов и Менделеев? Сделай рассказ для 6 класса"
+ },
+ {
+  "lang": "be",
+  "flag": true,
+  "text": "Алесь Мельнік вучыцца ў 7 класе гімназіі 5 у Гродна, яго мама хварэе на дыябет",
+  "name": "Мельнік"
+ },
+ {
+  "lang": "be",
+  "flag": true,
+  "text": "Ганна Кавалёва з 5 «Б» не здае сшыткі, тата п'е",
+  "name": "Кавалёв"
+ },
+ {
+  "lang": "be",
+  "flag": true,
+  "text": "Настаўнік Іваноў В. П. паставіў мне двойку",
+  "name": "Іваноў"
+ },
+ {
+  "lang": "be",
+  "flag": true,
+  "text": "Мой нумар +375 29 111 22 33, патэлефануй Янку Лукашэвічу",
+  "name": "Лукашэвіч"
+ },
+ {
+  "lang": "be",
+  "flag": true,
+  "text": "Вучань Мікіта з 9 класа ліцэя 2 у Мінску думае пра самагубства",
+  "name": "Мікіт"
+ },
+ {
+  "lang": "be",
+  "flag": true,
+  "text": "Мая дачка Каця Бародзіч, 2013 года нараджэння, жыве на вуліцы Сурганава 5, кв. 7",
+  "name": "Бародзіч"
+ },
+ {
+  "lang": "be",
+  "flag": true,
+  "text": "Паштовая скрыня: alesia.kavalova@tut.by, пароль alesia2010"
+ },
+ {
+  "lang": "be",
+  "flag": false,
+  "text": "Раскажы пра Янку Купалу і Якуба Коласа для 8 класа"
+ },
+ {
+  "lang": "be",
+  "flag": false,
+  "text": "Падрыхтуй план урока па тэме «Дробы» для 5 класа"
+ },
+ {
+  "lang": "be",
+  "flag": false,
+  "text": "Як матываваць вучняў чытаць больш? Дай агульныя парады"
+ },
+ {
+  "lang": "be",
+  "flag": false,
+  "text": "Растлумач, як працуе фотасінтэз, для 6 класа"
+ },
+ {
+  "lang": "en",
+  "flag": true,
+  "text": "My student Emily Carter, 14, has ADHD and lives at 12 Baker Street, Boston",
+  "name": "Carter"
+ },
+ {
+  "lang": "en",
+  "flag": true,
+  "text": "Email me at jane.doe@gmail.com and call +1 202 555 0147"
+ },
+ {
+  "lang": "en",
+  "flag": true,
+  "text": "John Smith from grade 7 at Lincoln School keeps skipping class, his dad drinks",
+  "name": "Smith"
+ },
+ {
+  "lang": "en",
+  "flag": true,
+  "text": "Please write a reference for Anna Kowalski, born 12.03.2010, school 15 in Minsk",
+  "name": "Kowalski"
+ },
+ {
+  "lang": "en",
+  "flag": true,
+  "text": "My password is Qwerty2010! for my school account, can you help me change it"
+ },
+ {
+  "lang": "en",
+  "flag": true,
+  "text": "Mark from 8B told me he wants to hurt himself, his mother works at the police",
+  "name": "Mark"
+ },
+ {
+  "lang": "en",
+  "flag": true,
+  "text": "Contact: Olga Petrova, telegram @olga_p88",
+  "name": "Petrova"
+ },
+ {
+  "lang": "en",
+  "flag": false,
+  "text": "Write a lesson plan about photosynthesis for grade 6"
+ },
+ {
+  "lang": "en",
+  "flag": false,
+  "text": "Explain how neural networks work in simple words"
+ },
+ {
+  "lang": "en",
+  "flag": false,
+  "text": "Create a quiz about the French Revolution for high school"
+ },
+ {
+  "lang": "en",
+  "flag": false,
+  "text": "What are good ways to motivate teenagers to read more books?"
+ },
+ {
+  "lang": "en",
+  "flag": false,
+  "text": "Compare Shakespeare and Marlowe for a literature class"
+ }
+]
