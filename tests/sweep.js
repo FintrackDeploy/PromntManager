@@ -76,6 +76,8 @@ const MUST = [
   ['домашнее насилие со стороны отчима', 'CRISIS', 'насили'],
   // секреты и профили
   ['пароль от дневника: qwerty12', 'SECRET', 'qwerty12'],
+  ['Пароль от школьного кабинета — qwerty-Example-2026!', 'SECRET', 'qwerty-Example-2026!'],
+  ['The password for the online school account is Example-Qwerty-2026!', 'SECRET', 'Example-Qwerty-2026!'],
   ['код шкафчика 1942', 'SECRET', '1942'],
   ['логин pupil2012, пароль letmein', 'CRED', 'pupil2012'],
   ['wifi пароль dom2010', 'SECRET', 'dom2010'],
@@ -108,6 +110,7 @@ const SAFE = [
   'История Беларуси в 10 классе',
   'Расскажи про Великое княжество Литовское',
   'пароль — это секретная строка, не настоящий пароль',
+  'Объясни, что означает выражение password for online school account.',
   'Опиши login page школьного сайта',
   'Классификация животных, 7 класс',
   'Дата урока 03.11.2026',

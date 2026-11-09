@@ -6,12 +6,12 @@
     esc = (s) =>
       s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   let off = new Set();
-  // Защита от мерцания: пока нейросеть ещё проверяет текст, уровень риска при вводе не опускается ниже уже подтверждённого.
+  // Пока нейросеть проверяет текст, уровень риска не опускается ниже уже подтверждённого.
   const ORD = { none: 0, review: 1, high: 2, critical: 3 };
   const stableLevel = (now, settled, pending) => (pending && settled && ORD[settled] > ORD[now] ? settled : now);
-  let settled = null, // последний подтверждённый уровень (нейросеть ответила или выключена)
+  let settled = null, // последний подтверждённый уровень
     finalFor = null; // текст, для которого нейросеть не ответила: показываем результат правил как окончательный
-  const nnPending = (t) => $('nn').checked && !NN.failed && finalFor !== t && !(NN.ready && NN.cache.has(t));
+  const nnPending = (t) => !NN.failed && finalFor !== t && !(NN.ready && NN.cache.has(t));
   function safeHtml(t, fs) {
     let o = '',
       p = 0;
@@ -28,11 +28,14 @@
     return o + esc(t.slice(p));
   }
   // Пояснения под вердиктом: проверка ещё не закончена или текст проверен не целиком.
-  function notes(t, withOff) {
+  function notes(t, withOff, hasFindings) {
     if (!withOff) return '';
     let h = '';
     if (nnPending(t))
       h += `<p class="sub">${NN.ready ? 'Нейросеть ещё проверяет имена, организации и места: результат может стать строже.' : 'Нейросеть ещё не загружена: имена пока ищут только правила, результат может стать строже.'}</p>`;
+    if (hasFindings && /(?:вымышленн\w*|учебн\w*\s+(?:пример|данн\w*)|синтетическ\w*\s+(?:пример|данн\w*))/i.test(t))
+      h +=
+        '<p class="sub">Пометка «вымышленный» не подтверждает, что данные обезличены: система проверяет сам текст и показывает найденные совпадения.</p>';
     if (t.length >= 10000)
       h += '<p class="sub">Проверены первые 10 000 символов текста: всё, что дальше, не анализировалось.</p>';
     return h;
@@ -42,7 +45,7 @@
     opt = opt || {};
     const r = analyze(t, opt.clean ? new Set() : off, ext(t)),
       pending = withOff && nnPending(t),
-      level = withOff ? stableLevel(r.level, $('live').checked ? settled : null, pending) : r.level,
+      level = withOff ? stableLevel(r.level, settled, pending) : r.level,
       lv = LV[level],
       n = r.f.length;
     if (withOff) {
@@ -53,7 +56,7 @@
     const brief = !!(opt && opt.brief);
     let h = '';
     const open = n === 0 || box.dataset.safe === '1';
-    h += `<div class="verdict L-${level}${first ? ' fresh' : ''}"><h3>${lv[0]}${pending ? ' <span class="pill pill-blue prov">предварительно</span>' : ''}</h3><p>${lv[2]}</p>${notes(t, withOff)}</div>`;
+    h += `<div class="verdict L-${level}${first ? ' fresh' : ''}"><h3>${lv[0]}${pending ? ' <span class="pill pill-blue prov">предварительно</span>' : ''}</h3><p>${lv[2]}</p>${notes(t, withOff, n > 0 || r.warns.length > 0)}</div>`;
     let p = 0,
       x = '';
     for (const m of r.f) {
@@ -163,16 +166,8 @@
     off = new Set();
     $('cnt').textContent = '0 / 10000';
   };
-  let tm;
   $('inp').oninput = () => {
     $('cnt').textContent = $('inp').value.length + ' / 10000';
-    if ($('live').checked) {
-      clearTimeout(tm);
-      tm = setTimeout(() => {
-        off = new Set();
-        run(true);
-      }, 450);
-    }
   };
   $('inp').onkeydown = (e) => {
     if (e.ctrlKey && e.key === 'Enter') {
@@ -317,7 +312,7 @@
       NN.w.terminate();
       NN.w = null;
     }
-    setNn('Только правила');
+    setNn('Модель недоступна · работают правила');
     toast(msg || 'Модель не загружена: работают правила', 1);
   }
   // При первом визите страница ещё не под контролем Service Worker и модель не попадает в его кэш: кладём её туда сами,
@@ -333,7 +328,7 @@
     if (NN.ready || NN.loading) return;
     NN.loading = true;
     NN.failed = false;
-    setNn('Загрузка нейросети (≈9 МБ, один раз)…');
+    setNn('Загрузка модели · около 9 МБ; правила уже работают');
     try {
       NN.w = new Worker('assets/ner-worker.js');
     } catch (e) {
@@ -343,13 +338,12 @@
     NN.w.onmessage = (e) => {
       const m = e.data;
       if (m.type === 'progress')
-        setNn('Загрузка нейросети: ' + Math.min(99, Math.round((m.loaded / m.total) * 100)) + '%');
+        setNn('Загрузка модели · ' + Math.min(99, Math.round((m.loaded / m.total) * 100)) + '%; правила работают');
       else if (m.type === 'ready') {
         NN.ready = true;
         NN.loading = false;
         cacheModel();
-        setNn('Нейросеть готова', 1);
-        toast('Нейросеть загружена');
+        setNn('Модель готова', 1);
         if ($('inp').value.trim()) run(true);
         nnFind(CASES[1][1]).then(() => paintDesk());
       } else if (m.type === 'error') nnFail();
@@ -378,11 +372,11 @@
   }
   // Мгновенный доступ: результат нейросети, если он уже посчитан для этого текста.
   function ext(t) {
-    return NN.ready && $('nn').checked && NN.cache.has(t) ? NN.cache.get(t) : null;
+    return NN.ready && NN.cache.has(t) ? NN.cache.get(t) : null;
   }
-  // Для тренажёра: дождаться нейросети, если она включена.
+  // Для тренажёра: дождаться локальной нейросети.
   async function extAsync(t) {
-    if (!NN.ready || !$('nn').checked) return null;
+    if (!NN.ready) return null;
     try {
       return await nnFind(t);
     } catch (e) {
@@ -392,14 +386,14 @@
   // После быстрой проверки правилами запускаем нейросеть и перерисовываем результат, когда она ответит.
   function kickNn(t) {
     const my = ++runId;
-    if (!NN.ready || !$('nn').checked || NN.cache.has(t)) return;
-    setNn('Нейросеть анализирует…');
+    if (!NN.ready || NN.cache.has(t)) return;
+    setNn('Модель проверяет имена · правила уже проверили текст');
     nnFind(t).then((f) => {
       if (f && my === runId && $('inp').value === t) {
-        setNn('Нейросеть готова', 1);
+        setNn('Модель готова', 1);
         run(true);
       } else if (my === runId && !f && NN.ready) {
-        setNn('Нейросеть готова', 1);
+        setNn('Модель готова', 1);
         if ($('inp').value === t) {
           finalFor = t; // ответа не будет (запрос пропущен или сбой): не оставляем пометку «предварительно»
           run(true);
@@ -407,17 +401,8 @@
       }
     });
   }
-  $('nn').onchange = () => {
-    if ($('nn').checked) {
-      NN.ready ? setNn('Нейросеть готова', 1) : nnStart();
-    } else setNn('Нейросеть выключена');
-    if ($('inp').value.trim()) run();
-  };
-  // Экономия трафика: на медленной сети или при включённом «Экономии данных» модель (~9 МБ) не качается сама.
-  const conn = navigator.connection || {};
-  if (conn.saveData || /^(?:slow-2g|2g|3g)$/.test(conn.effectiveType || '')) $('nn').checked = false;
-  if ($('nn').checked) setTimeout(nnStart, 300);
-  else setNn('Нейросеть выключена: включите переключатель, чтобы скачать модель (~9 МБ)');
+  // Модель запускается автоматически и остаётся включённой для анализатора и тренажёра.
+  setTimeout(nnStart, 300);
 
   // ===== Навигация, методика, шаги тренажёра =====
   const PG = ['home', 'analyzer', 'trainer', 'method', 'about'],
@@ -494,7 +479,7 @@
     ],
     'Нормативные ориентиры': [
       'Нормативные ориентиры',
-      '<ul><li>Закон Республики Беларусь от 07.05.2021 № 99-З «О защите персональных данных» (проверьте актуальную редакцию).</li><li>Локальные акты и политика учреждения образования.</li></ul><p class="notice">Перечень нужно дополнить и проверить юристом перед публикацией.</p>'
+      '<ul><li>Закон Республики Беларусь от 07.05.2021 № 99-З «О защите персональных данных».</li><li>Локальные акты и политика учреждения образования.</li></ul>'
     ]
   };
   document.addEventListener('click', (e) => {

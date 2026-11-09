@@ -19,7 +19,6 @@ const A = [
   'assets/icon-192.png',
   'assets/icon-512.png',
   'assets/logo-seal.png',
-  'assets/logo-mark.png',
   'manifest.webmanifest'
 ];
 // Неизменные тяжёлые файлы (шрифты, библиотека) кладём в кэш сразу при установке. Модель (9 МБ) туда добавляет страница

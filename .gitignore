@@ -1,6 +1,8 @@
 # Dependencies and generated site build
 node_modules/
 dist/
+training/ner/generated/
+training/ner/model/
 
 # Local editor and agent tooling
 .idea/
@@ -18,3 +20,8 @@ skills-lock.json
 .env.*
 !.env.example
 *.log
+
+# Local Python training environment
+training/ner/.venv/
+training/ner/__pycache__/
+__pycache__/

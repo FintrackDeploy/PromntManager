@@ -1,4 +1,4 @@
-// node tests/holdout.js — независимый набор: полнота и точность по критериям (правила и правила + нейросеть).
+// node tests/holdout.js — авторский контрольный набор для сверки полноты и точности по критериям.
 const fs = require('fs'),
   path = require('path');
 const A = require('../assets/analyzer.js');
@@ -28,7 +28,7 @@ const f = (n) => (n * 100).toFixed(0) + '%',
   a = ev(false),
   b = ev(true, process.argv[2] === '-v');
 console.log(
-  `Независимый набор (${D.length}): правила точность ${f(a.P)} полнота ${f(a.R)} | с нейросетью точность ${f(b.P)} полнота ${f(b.R)} (tp ${b.tp}, fp ${b.fp}, fn ${b.fn})`
+  `Авторский контрольный набор (${D.length}): правила точность ${f(a.P)} полнота ${f(a.R)} | с нейросетью точность ${f(b.P)} полнота ${f(b.R)} (tp ${b.tp}, fp ${b.fp}, fn ${b.fn})`
 );
 if (b.R < 0.9 || b.P < 0.9) {
   process.exitCode = 1;

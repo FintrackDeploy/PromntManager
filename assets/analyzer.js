@@ -217,7 +217,7 @@
     ],
     [
       'SECRET',
-      /sk-[A-Za-z0-9_-]{16,}|AKIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{30,}|AIza[0-9A-Za-z_-]{30,}|xox[baprs]-[A-Za-z0-9-]{10,}|eyJ[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{4,}|Bearer\s+[A-Za-z0-9._~+\/=-]{12,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|(?:пароль|парол[ьяю]|password|passwd|pwd|(?<![A-Za-z])pass(?![A-Za-z])|api[ _-]?key|token|secret)(?:\s+(?:от|к|для|на|of|for)\s+\S+)?(?:\s*(?:[:=]|—|-)\s*[^\sА-ЯІЎа-яёіўЁ]{3,}|\s+is\s+[^\sА-ЯІЎа-яёіўЁ]{3,}|\s*(?=\S*[\d!@#$%^&*_])\S{4,}|\s+(?!(?:policy|manager|hash\w*|strength|reset|recovery|protection|security|field|input|rules|requirements|length|generator|storage|safe|good|bad|strong|weak|best|tips|and|for|the|are|should|must|can|with)\b)[A-Za-z]{4,})/gi,
+      /sk-[A-Za-z0-9_-]{16,}|AKIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{30,}|AIza[0-9A-Za-z_-]{30,}|xox[baprs]-[A-Za-z0-9-]{10,}|eyJ[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{4,}|Bearer\s+[A-Za-z0-9._~+\/=-]{12,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|(?:пароль|парол[ьяю]|password|passwd|pwd|(?<![A-Za-z])pass(?![A-Za-z])|api[ _-]?key|token|secret)(?:(?:\s+(?:от|к|для|на|of|for|to)\s+[A-Za-zА-ЯЁІЎа-яёіў]+(?:\s+[A-Za-zА-ЯЁІЎа-яёіў]+){0,4})|(?:\s+[A-Za-zА-ЯЁІЎа-яёіў]+))?(?:\s*[:=—-]\s*[^\sА-ЯІЎа-яёіўЁ]{3,}|\s+is\s+[^\sА-ЯІЎа-яёіўЁ]{3,}|\s*(?=\S*[\d!@#$%^&*_])\S{4,})/gi,
       'высокая'
     ],
     ['DOCM', W(D.docm_markers), 'низкая'],
@@ -668,6 +668,16 @@
     ]
   );
 
+  function isHealthPlaceholder(t, x) {
+    const left = t.lastIndexOf('[', x.s),
+      right = t.indexOf(']', x.e);
+    if (left < 0 || right < x.e || right - left > 64) return false;
+    const label = t.slice(left + 1, right).trim();
+    return /^(?:диагноз(?: здоровья)?|состояние(?: здоровья)?|health(?: condition)?|medical condition|medical history)$/i.test(
+      label
+    );
+  }
+
   function analyze(t, off, ext) {
     off = off || new Set();
     let f = [];
@@ -699,6 +709,7 @@
     f = f.filter(
       (x) =>
         !(['NAME', 'LOC', 'ORG'].includes(x.ty) && (PUB.test(x.txt) || PUB2.test(x.txt))) &&
+        !(x.ty === 'HEALTH' && isHealthPlaceholder(t, x)) &&
         !isCountry(x, t) &&
         !(x.ty === 'NAME' && NSTOP.test(x.txt.split(/\s+/)[0])) &&
         !(x.ty === 'NAME' && /\s[IVX]{1,4}$/.test(x.txt)) &&
@@ -775,7 +786,12 @@
       cats = new Set(fs.map((x) => x.cat)),
       warns = [];
     const ind = ['SCHOOL', 'CLASS', 'LOC', 'RARE', 'ORG', 'CONF'].filter((k) => ty.has(k)).length;
-    if (ind >= 2) {
+    const uniqueContext =
+      ty.has('RARE') &&
+      /(?<![а-яёіў])в\s+(?:классе|школе|районе|деревне|посёлке|поселке|городе)(?![а-яёіў])|(?<![а-яёіў])из\s+класса(?![а-яёіў])/i.test(
+        t
+      );
+    if (ind >= 2 || uniqueContext) {
       cats.add('C2');
       warns.push([
         'C2',
@@ -798,9 +814,7 @@
       ]);
     } else if (ty.has('TMPL') || (ty.has('CONF') && (ty.has('CLASS') || ty.has('NAME') || ty.has('SCHOOL'))))
       cats.add('C5');
-    const exampleMail = fs
-      .filter((x) => x.ty === 'EMAIL')
-      .every((x) => /@example\.(?:com|org|net)\b/i.test(x.txt));
+    const exampleMail = fs.filter((x) => x.ty === 'EMAIL').every((x) => /@example\.(?:com|org|net)\b/i.test(x.txt));
     const strong =
       [
         'PHONE',
@@ -822,7 +836,14 @@
     const named = ty.has('NAME');
     let level = 'none';
     if (fs.length || warns.length) level = 'review';
-    if (strong || (named && ind >= 1) || (ind >= 2 && sens) || ind >= 3 || (cats.has('C8') && (direct || ind >= 1)))
+    if (
+      strong ||
+      (named && ind >= 1) ||
+      (ind >= 2 && sens) ||
+      ind >= 3 ||
+      uniqueContext ||
+      (cats.has('C8') && (direct || ind >= 1))
+    )
       level = 'high';
     if ((strong || named || ind >= 2) && sens) level = 'critical';
     if (ty.has('CRISIS') && level !== 'critical') level = 'high';

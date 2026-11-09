@@ -102,10 +102,15 @@ if (!w.BP || !w.BP.analyze || !w.BP.ui || !w.BP.rules || !w.BP.TR) {
   process.exit(1);
 }
 const $ = (id) => w.document.getElementById(id);
+(function () {
+  ok($('nns').getAttribute('role') === 'status', 'Статус модели не объявлен как статус для вспомогательных технологий');
+  ok(/правила/i.test($('nns').textContent), 'До загрузки модели не объяснено, что правила уже работают');
+})();
 (async () => {
   // 1. нейросеть загрузилась в воркере
   for (let i = 0; i < 200 && !/готова/.test($('nns').textContent); i++) await sleep(100);
   ok(/готова/.test($('nns').textContent), 'Нейросеть не загрузилась: ' + $('nns').textContent);
+  ok($('nns').getAttribute('aria-live') === 'polite', 'Статус модели не объявлен через aria-live');
   ok(
     requests.filter((r) => r.startsWith('fetch:')).join() === 'fetch:ner/ner-v2.bin',
     'Сетевые запросы воркера: ' + requests.join(',')
@@ -140,14 +145,25 @@ const $ = (id) => w.document.getElementById(id);
       !/ік[\s,.]/.test($('res').querySelector('.safe').textContent),
     'В безопасном варианте остался хвост фамилии'
   );
-  // 2б. нет мерцания: пока нейросеть думает, уровень не падает и стоит пометка «предварительно»; потом пометка исчезает
+  $('inp').value = 'Вымышленный пример: ученик Алексей Смирнов из школы №12 в Минске болеет астмой.';
+  $('go').click();
+  await sleep(400);
+  ok(
+    /Пометка «вымышленный» не подтверждает/.test($('res').textContent),
+    'Не объяснено, почему анализируются помеченные вымышленными данные'
+  );
+  // 2б. модель включена автоматически: правила дают результат сразу, модель дополняет его без мерцания уровня
   {
     const sl = w.BP.ui.stableLevel;
     ok(sl('review', 'high', true) === 'high', 'stableLevel: при ожидании нейросети уровень не должен падать');
     ok(sl('critical', 'high', true) === 'critical', 'stableLevel: более высокий уровень правил должен сохраняться');
     ok(sl('review', 'high', false) === 'review', 'stableLevel: без ожидания показывается фактический уровень');
     ok(sl('none', null, true) === 'none', 'stableLevel: без подтверждённого уровня ничего не удерживается');
-    $('live').checked = true;
+    ok(!$('live') && !$('nn'), 'В интерфейсе остались удалённые переключатели проверки');
+    ok(
+      requests.filter((r) => r.startsWith('worker:')).length === 1,
+      'Локальная модель не запустилась автоматически ровно один раз'
+    );
     $('inp').value = 'Ученик Артём Сидоров из 7Б живёт в Гродно, мама работает в ГАИ';
     $('go').click();
     const first = $('res').querySelector('.verdict');
@@ -156,13 +172,11 @@ const $ = (id) => w.document.getElementById(id);
     for (let i = 0; i < 100 && /предварительно/.test($('res').textContent); i++) await sleep(50);
     ok(!/предварительно/.test($('res').textContent), 'Пометка «предварительно» не исчезла после ответа нейросети');
     ok($('res').getAttribute('aria-busy') === 'false', 'aria-busy не сброшен');
-    // повторная отрисовка не должна заново запускать анимацию появления
+    // Изменение текста не запускает устаревший режим проверки при каждом вводе.
     $('inp').value += ' и сестра Лена';
     $('inp').oninput();
-    await sleep(700); // дольше задержки ввода (450 мс): результат уже перерисован
-    for (let i = 0; i < 80 && !$('res').querySelector('.verdict'); i++) await sleep(50);
-    for (let i = 0; i < 100 && /предварительно/.test($('res').textContent); i++) await sleep(50);
-    ok(!$('res').querySelector('.verdict.fresh'), 'Анимация появления повторяется при обновлении результата');
+    await sleep(500);
+    ok(!$('res').querySelector('.verdict.fresh'), 'Ввод текста запустил проверку без нажатия кнопки');
   }
   // 3. XSS: пользовательский ввод не становится разметкой
   $('inp').value =

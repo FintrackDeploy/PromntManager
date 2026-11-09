@@ -19,15 +19,17 @@
 <body data-page="home">
 <a class="skip-link" href="#main">Перейти к содержимому</a>
 <header>
-  <a class="brand" href="#home" data-page="home" aria-label="ГрОИРО, Безопасный промпт"><span class="gl"><i class="gl-m" aria-hidden="true"></i><span class="gl-t">ГрОИРО</span></span></a>
-  <nav class="navlinks" id="navlinks" aria-label="Основная навигация">
-    <button data-page="home" class="active" type="button">Главная</button>
-    <button data-page="analyzer" type="button">Анализатор</button>
-    <button data-page="trainer" type="button">Тренажёр</button>
-    <button data-page="method" type="button">Методика</button>
-    <button data-page="about" type="button">О проекте</button>
-  </nav>
-  <button class="mobile-menu" id="menuToggle" type="button" aria-expanded="false" aria-controls="navlinks">Меню</button>
+  <div class="header-inner">
+    <a class="brand" href="#home" data-page="home" aria-label="ГрОИРО, Безопасный промпт"><span class="gl"><i class="gl-m" aria-hidden="true"></i><span class="gl-t">ГрОИРО</span></span></a>
+    <nav class="navlinks" id="navlinks" aria-label="Основная навигация">
+      <button data-page="home" class="active" type="button">Главная</button>
+      <button data-page="analyzer" type="button">Анализатор</button>
+      <button data-page="trainer" type="button">Тренажёр</button>
+      <button data-page="method" type="button">Методика</button>
+      <button data-page="about" type="button">О проекте</button>
+    </nav>
+    <button class="mobile-menu" id="menuToggle" type="button" aria-expanded="false" aria-controls="navlinks">Меню</button>
+  </div>
 </header>
 <main id="main" tabindex="-1">
 <section class="view" id="view-home">
@@ -132,10 +134,7 @@
     </div>
   </section>
 
-  <div class="rule" aria-hidden="true"><span></span><i class="gl-m"></i><span></span></div>
-
   <section class="hs cta">
-    <i class="logo-full" role="img" aria-label="ГрОИРО"></i>
     <h2 class="rv">Проверьте запрос<br>до отправки</h2>
     <p class="rv">Ничего не сохраняется после закрытия вкладки.</p>
     <div class="sheet-actions cta-act rv"><button class="btn btn-dark" data-page="analyzer" type="button">Открыть анализатор</button><button class="btn btn-ghost" data-page="trainer" type="button">Попробовать тренажёр</button></div>
@@ -143,177 +142,212 @@
 </section>
 
 <section class="view page hidden" id="view-analyzer">
-  <div class="work">
-    <h1>Проверка запроса</h1>
-    <p class="lede">Не вводите реальные данные учащихся. Анализатор может ошибаться. Текст не уходит из браузера.</p>
+  <div class="analyzer-page">
+    <div class="analyzer-intro">
+      <div>
+        <p class="eyebrow">Безопасность запроса · прямо в браузере</p>
+        <h1>Проверьте текст<br>до отправки</h1>
+        <p class="lede">Найдите персональные данные и лишние подробности. Сохраните задачу, убрав то, по чему можно узнать человека.</p>
+      </div>
+      <p class="privacy-note"><span><b>Текст остаётся у вас</b><br>Проверка выполняется на этом устройстве. Не вводите реальные данные учащихся.</span></p>
+    </div>
     <div class="editor">
       <div class="ed-top">
+        <span class="editor-label">Текст для проверки</span>
         <span class="ed-tools">
-          <label class="switch" title="Нейросеть около 9 МБ: загружается один раз и работает на устройстве"><input type="checkbox" id="nn" checked><span class="track"></span>Нейросеть</label>
-          <span class="pill pill-blue" id="nns">Загрузка…</span>
-          <label class="switch"><input type="checkbox" id="live"><span class="track"></span>При вводе</label>
+          <span class="pill pill-blue" id="nns" role="status" aria-live="polite">Правила работают · загружается модель</span>
         </span>
       </div>
       <label class="sr-only" for="inp">Текст промпта</label>
-      <textarea id="inp" maxlength="10000" placeholder="Вставьте запрос. Например: составьте план урока для 8 класса о безопасном поведении в интернете." aria-describedby="cnt"></textarea>
+      <textarea id="inp" maxlength="10000" placeholder="Вставьте запрос или выберите пример ниже. Например: составьте план урока для 8 класса о безопасном поведении в интернете." aria-describedby="cnt"></textarea>
       <div class="ed-bot">
-        <div class="chips">
-          <button class="chip" data-ex="0" type="button">Безопасный запрос</button>
-          <button class="chip" data-ex="1" type="button">Характеристика ученика</button>
-          <button class="chip" data-ex="2" type="button">Здоровье и семья</button>
-          <button class="chip" data-ex="3" type="button">Контакты в письме</button>
-          <button class="chip" data-ex="6" type="button">Пароль в коде</button>
+        <div class="example-area">
+          <span class="example-label">Или разберите пример</span>
+          <div class="chips">
+            <button class="chip" data-ex="0" type="button">Безопасный запрос</button>
+            <button class="chip" data-ex="1" type="button">Характеристика ученика</button>
+            <button class="chip" data-ex="2" type="button">Здоровье и семья</button>
+            <button class="chip" data-ex="3" type="button">Контакты в письме</button>
+            <button class="chip" data-ex="6" type="button">Пароль в коде</button>
+          </div>
         </div>
         <div class="button-row">
-          <button class="btn btn-primary" id="go" type="button">Проверить</button>
-          <button class="btn btn-quiet" id="up" type="button">Файл</button>
+          <button class="btn btn-primary" id="go" type="button">Проверить текст</button>
+          <button class="btn btn-quiet" id="up" type="button">Загрузить файл</button>
           <button class="btn btn-quiet" id="clr" type="button">Очистить</button>
           <span class="cnt" id="cnt" aria-live="polite">0 / 10000</span>
         </div>
         <input type="file" id="fl" accept=".txt,.md,.csv,.docx" hidden>
       </div>
     </div>
-    <div id="res" aria-live="polite"></div>
+    <div class="result-area">
+      <h2>Результат проверки</h2>
+      <div id="res" aria-live="polite"></div>
+    </div>
   </div>
 </section>
 
 <section class="view page hidden" id="view-trainer">
-  <div class="work">
-    <h1>Тренажёр на вымышленных кейсах</h1>
-    <p class="lede">Три упражнения, три навыка. Кейсы собираются заново, поэтому их нельзя выучить наизусть.</p>
-    <div class="tr-modes" role="tablist" aria-label="Упражнения">
-      <button class="tr-mode on" role="tab" aria-selected="true" type="button"><b>Найди риски</b><span class="d">Отметьте в запросе то, что нельзя отправлять.</span></button>
-      <button class="tr-mode" role="tab" aria-selected="false" type="button"><b>Перепиши безопасно</b><span class="d">Уберите лишнее и сохраните цель запроса.</span></button>
-      <button class="tr-mode" role="tab" aria-selected="false" type="button"><b>Отправлять или нет?</b><span class="d">Пять ситуаций: когда ИИ не подходит.</span></button>
+  <div class="trainer-page">
+    <div class="trainer-intro">
+      <div>
+        <p class="eyebrow">Практика на вымышленных кейсах</p>
+        <h1>Замечайте лишнее.<br>Сохраняйте суть.</h1>
+        <p class="lede">Тренируйтесь находить риски, обезличивать запросы и решать, когда ИИ лучше не использовать.</p>
+      </div>
     </div>
-    <div class="tr-bar">
+    <div class="tr-modes" role="tablist" aria-label="Упражнения">
+      <button class="tr-mode on" role="tab" aria-selected="true" aria-controls="tr1" type="button"><b>Найти риски</b><span class="d">Отметьте фрагменты, которые нельзя отправлять.</span></button>
+      <button class="tr-mode" role="tab" aria-selected="false" aria-controls="tr2" type="button"><b>Переписать запрос</b><span class="d">Уберите лишнее, сохранив цель.</span></button>
+      <button class="tr-mode" role="tab" aria-selected="false" aria-controls="tr3" type="button"><b>Решить, отправлять ли</b><span class="d">Разберите пять ситуаций из практики.</span></button>
+    </div>
+    <div class="training-toolbar">
       <div class="lvl-sel" id="trLv" role="group" aria-label="Уровень сложности">
+        <span class="toolbar-label">Сложность</span>
         <button class="lvb on" data-lv="1" type="button">Контакты</button>
         <button class="lvb" data-lv="2" type="button">Косвенные признаки</button>
-        <button class="lvb" data-lv="3" type="button">Чувствительное</button>
+        <button class="lvb" data-lv="3" type="button">Чувствительные данные</button>
       </div>
-      <span id="trStat">Результаты хранятся только до закрытия страницы</span>
+      <span id="trStat" aria-live="polite">Результаты хранятся только до закрытия страницы</span>
     </div>
-    <section class="panel" id="tr1">
-      <h2>Найдите риски</h2>
-      <p class="sub">Нажимайте на фрагменты, которые не стоит отправлять, затем нажмите «Проверить».</p>
-      <div class="frags" id="frags"></div>
-      <div class="button-row">
-        <button class="btn btn-primary" id="t1chk" type="button">Проверить</button>
-        <button class="btn btn-quiet" id="t1next" type="button">Новый кейс</button>
-      </div>
-      <div id="t1res" aria-live="polite"></div>
-    </section>
-    <section class="panel hidden" id="tr2">
-      <h2>Перепишите запрос безопасно</h2>
-      <p class="sub">Сохраните цель и уберите лишнее. Проверка использует тот же анализатор.</p>
-      <div class="case-box" id="t2text"></div>
-      <label class="label" for="t2in">Ваша редакция</label>
-      <textarea id="t2in" placeholder="Перепишите запрос здесь…"></textarea>
-      <div class="button-row">
-        <button class="btn btn-primary" id="t2chk" type="button">Проверить</button>
-        <button class="btn btn-quiet" id="t2show" type="button">Показать пример</button>
-        <button class="btn btn-quiet" id="t2next" type="button">Новый кейс</button>
-      </div>
-      <div id="t2res" aria-live="polite"></div>
-    </section>
-    <section class="panel hidden" id="tr3">
-      <h2>Отправлять или нет?</h2>
-      <p class="sub">Раунд из пяти ситуаций. Выберите действие и сразу прочитайте объяснение.</p>
-      <div id="t3box"></div>
-    </section>
-    <aside class="panel case-aside">
-      <h3>Подсказка</h3>
-      <p class="sub">Можно ли выполнить задачу без имени, контактов, точного места учёбы или уникальных подробностей?</p>
-      <p class="sub">Принцип: меньше данных и обезличенный контекст.</p>
-    </aside>
+    <div class="trainer-workbench">
+      <section class="panel trainer-task" id="tr1" role="tabpanel">
+        <h2>Найдите риски</h2>
+        <p class="sub">Нажимайте на фрагменты, которые не стоит отправлять, затем проверьте себя.</p>
+        <div class="frags" id="frags"></div>
+        <div class="button-row">
+          <button class="btn btn-primary" id="t1chk" type="button">Проверить выбор</button>
+          <button class="btn btn-quiet" id="t1next" type="button">Новый кейс</button>
+        </div>
+        <div id="t1res" aria-live="polite"></div>
+      </section>
+      <section class="panel trainer-task hidden" id="tr2" role="tabpanel">
+        <h2>Перепишите запрос безопасно</h2>
+        <p class="sub">Сохраните цель и уберите лишнее. Готовую редакцию можно сразу проверить.</p>
+        <div class="case-box" id="t2text"></div>
+        <label class="label" for="t2in">Ваша редакция</label>
+        <textarea id="t2in" placeholder="Перепишите запрос здесь…"></textarea>
+        <div class="button-row">
+          <button class="btn btn-primary" id="t2chk" type="button">Проверить редакцию</button>
+          <button class="btn btn-quiet" id="t2show" type="button">Показать пример</button>
+          <button class="btn btn-quiet" id="t2next" type="button">Новый кейс</button>
+        </div>
+        <div id="t2res" aria-live="polite"></div>
+      </section>
+      <section class="panel trainer-task hidden" id="tr3" role="tabpanel">
+        <h2>Отправлять или нет?</h2>
+        <p class="sub">Раунд из пяти ситуаций. Выберите действие и прочитайте объяснение.</p>
+        <div id="t3box"></div>
+      </section>
+      <aside class="panel case-aside">
+        <h3>Проверьте себя</h3>
+        <p>Можно ли выполнить задачу без имени, контактов, точного места учёбы или уникальных подробностей?</p>
+        <p class="sub">Основной принцип: меньше данных и обезличенный контекст.</p>
+      </aside>
+    </div>
   </div>
 </section>
 
 <section class="view page hidden" id="view-method">
-  <div class="work">
-    <h1>Материалы занятия</h1>
-    <p class="lede">Черновики для педагога. Перед использованием согласуйте их с методистом и проверьте нормативные ссылки.</p>
-    <div class="tabs" role="group" aria-label="Категория материалов">
-      <button class="tab active" data-filter="all" type="button">Все материалы</button>
-      <button class="tab" data-filter="teachers" type="button">Для педагогов</button>
-      <button class="tab" data-filter="parents" type="button">Для родителей</button>
-      <button class="tab" data-filter="preschool" type="button">Для дошкольного образования</button>
+  <div class="method-page">
+    <div class="method-intro">
+      <p class="eyebrow">Методика и готовые материалы</p>
+      <h1>Учите безопасной<br>работе с ИИ</h1>
+      <p class="lede">Конспекты, памятки и упражнения о том, как беречь личные данные и сохранять смысл запроса.</p>
     </div>
-    <div class="materials" id="resourceGrid">
-      <article class="resource-card" data-category="teachers">
-        <div><h3>Занятие «Безопасный промпт»</h3><p>Конспект на 30 минут: разбор, тренажёр, переписывание и рефлексия.</p></div>
-        <button class="btn btn-quiet resource-btn" data-resource="Конспект занятия «Безопасный промпт»" type="button">Подробнее</button>
-      </article>
-      <article class="resource-card" data-category="teachers">
-        <div><h3>Карточки ситуационных задач</h3><p>Три упражнения тренажёра: найти риски, переписать, решить, отправлять ли.</p></div>
-        <button class="btn btn-quiet resource-btn" data-resource="Карточки ситуационных задач" type="button">Подробнее</button>
-      </article>
-      <article class="resource-card" data-category="teachers">
-        <div><h3>Чек-лист перед отправкой</h3><p>Пять вопросов: имена, сочетание деталей, здоровье, диагноз, право передавать.</p></div>
-        <button class="btn btn-quiet resource-btn" data-resource="Чек-лист перед отправкой" type="button">Подробнее</button>
-      </article>
-      <article class="resource-card" data-category="parents">
-        <div><h3>ИИ и безопасность ребёнка</h3><p>Памятка для разговора дома: что не вводят в чат и как проверять ответы.</p></div>
-        <button class="btn btn-quiet resource-btn" data-resource="Памятка для родителей" type="button">Подробнее</button>
-      </article>
-      <article class="resource-card" data-category="preschool">
-        <div><h3>Дошкольное образование</h3><p>ИИ ведёт взрослый. В запрос не попадают фото, имена и сведения о воспитанниках.</p></div>
-        <button class="btn btn-quiet resource-btn" data-resource="Рекомендации для дошкольного образования" type="button">Подробнее</button>
-      </article>
-      <article class="resource-card" data-category="teachers">
-        <div><h3>Нормативные ориентиры</h3><p>Закон № 99-З и место для локальных актов учреждения. Перечень нужно дополнить.</p></div>
-        <button class="btn btn-quiet resource-btn" data-resource="Нормативные ориентиры" type="button">Подробнее</button>
-      </article>
-    </div>
-    <div class="panel hidden" id="resDetail" tabindex="-1"></div>
+    <section class="method-resources" aria-labelledby="resourcesTitle">
+      <div class="resources-heading">
+        <div>
+          <h2 id="resourcesTitle">Выберите материал</h2>
+          <p>Подберите формат для своей аудитории.</p>
+        </div>
+        <div class="tabs" role="group" aria-label="Аудитория материалов">
+          <button class="tab active" data-filter="all" type="button">Все материалы</button>
+          <button class="tab" data-filter="teachers" type="button">Педагогам</button>
+          <button class="tab" data-filter="parents" type="button">Родителям</button>
+          <button class="tab" data-filter="preschool" type="button">Дошкольное образование</button>
+        </div>
+      </div>
+      <div class="materials" id="resourceGrid" aria-live="polite">
+        <article class="resource-card featured-resource" data-category="teachers">
+          <div><h3>Занятие «Безопасный промпт»</h3><p>Конспект на 30 минут: разбор, тренажёр, переписывание и рефлексия.</p></div>
+          <button class="btn btn-quiet resource-btn" data-resource="Конспект занятия «Безопасный промпт»" type="button">Открыть конспект <span aria-hidden="true">→</span></button>
+        </article>
+        <article class="resource-card" data-category="teachers">
+          <div><h3>Карточки ситуационных задач</h3><p>Три упражнения тренажёра: найти риски, переписать, решить, отправлять ли.</p></div>
+          <button class="btn btn-quiet resource-btn" data-resource="Карточки ситуационных задач" type="button">Открыть материал <span aria-hidden="true">→</span></button>
+        </article>
+        <article class="resource-card" data-category="teachers">
+          <div><h3>Чек-лист перед отправкой</h3><p>Пять вопросов: имена, сочетание деталей, здоровье, диагноз, право передавать.</p></div>
+          <button class="btn btn-quiet resource-btn" data-resource="Чек-лист перед отправкой" type="button">Открыть материал <span aria-hidden="true">→</span></button>
+        </article>
+        <article class="resource-card" data-category="parents">
+          <div><h3>ИИ и безопасность ребёнка</h3><p>Памятка для разговора дома: что не вводят в чат и как проверять ответы.</p></div>
+          <button class="btn btn-quiet resource-btn" data-resource="Памятка для родителей" type="button">Открыть памятку <span aria-hidden="true">→</span></button>
+        </article>
+        <article class="resource-card" data-category="preschool">
+          <div><h3>Дошкольное образование</h3><p>ИИ ведёт взрослый. В запрос не попадают фото, имена и сведения о воспитанниках.</p></div>
+          <button class="btn btn-quiet resource-btn" data-resource="Рекомендации для дошкольного образования" type="button">Открыть рекомендации <span aria-hidden="true">→</span></button>
+        </article>
+        <article class="resource-card" data-category="teachers">
+          <div><h3>Нормативные ориентиры</h3><p>Закон № 99-З, локальные акты и политика учреждения образования.</p></div>
+          <button class="btn btn-quiet resource-btn" data-resource="Нормативные ориентиры" type="button">Открыть материал <span aria-hidden="true">→</span></button>
+        </article>
+      </div>
+      <div class="panel hidden" id="resDetail" tabindex="-1"></div>
+    </section>
   </div>
 </section>
 
 <section class="view page hidden" id="view-about">
-  <div class="work">
-    <h1>Как устроена проверка</h1>
-    <p class="lede">«Безопасный промпт» помогает педагогу заметить в запросе к ИИ личные и лишние сведения и переписать его до отправки.</p>
-    <h2>Что ищет анализатор</h2>
-    <p>Правила находят контакты, документы, адреса, секреты, школу и класс, здоровье и семью. Имена, организации и места добавляет нейросеть Slovnet NER проекта Natasha (лицензия MIT): она работает на устройстве, около 9 МБ, один раз. На разговорном тексте и редких именах она ошибается чаще. Внешний ИИ не используется. Уровень риска задают правила сочетаний, без числовых баллов.</p>
-    <h2>Критерии методики</h2>
-    <dl id="crit">
-      <div><dt>C1. Прямые идентификаторы</dt><dd>Имя, телефон, адрес, документ, почта, ник.</dd></div>
-      <div><dt>C2. Косвенная идентификация</dt><dd>Школа, класс, населённый пункт, редкое обстоятельство.</dd></div>
-      <div><dt>C3. Здоровье и психология</dt><dd>Диагноз, состояние, запрос оценить здоровье.</dd></div>
-      <div><dt>C4. Семья и социальное положение</dt><dd>Состав семьи, работа родителей, бытовые подробности.</dd></div>
-      <div><dt>C5. Избыточность данных</dt><dd>Сведения, без которых задачу всё равно можно поставить.</dd></div>
-      <div><dt>C6. Внешний сервис</dt><dd>Куда уходит запрос. Это организационный вопрос, его не закрывает автоматическая проверка.</dd></div>
-      <div><dt>C7. Защита информации</dt><dd>Пароли, ключи, закрытые материалы, коды из сообщений.</dd></div>
-      <div><dt>C8. Ответ ИИ о человеке</dt><dd>Просьба поставить диагноз или принять решение о конкретном человеке.</dd></div>
-    </dl>
-    <h2>Приватность</h2>
-    <p>Текст анализируется в браузере. Приложение не отправляет его на сервер, не использует cookies, localStorage и аналитику. Для офлайн-режима кэшируются только файлы самого приложения.</p>
-    <p>Как проверить: откройте вкладку «Сеть» в инструментах разработчика и нажмите «Проверить». Запроса с текстом не будет. Код открыт, автотест следит, чтобы сетевых и storage-вызовов не добавилось.</p>
-    <p>Перед вводом персональных данных руководствуйтесь законодательством Республики Беларусь, включая Закон от 07.05.2021 № 99-З «О защите персональных данных», и документами учреждения. Это описание не заменяет правовую экспертизу.</p>
-    <details>
-      <summary>C6. Перед использованием внешних ИИ-сервисов</summary>
-      <p>Выясните, в какой стране обрабатываются данные, кто получатель, на каком основании их передают и как хранят запросы. Не передавайте реальные данные учащихся без такой проверки.</p>
-    </details>
-    <p class="caption">Версия правил 1.7. Нормативная сверка 4 ноября 2026, частично. Шрифты Old Standard TT и Onest (OFL), JSZip (MIT/GPL), Slovnet и Navec (MIT).</p>
+  <div class="about-page">
+    <div class="about-intro">
+      <div>
+        <p class="eyebrow">О проекте</p>
+        <h1>Безопасный<br>промпт</h1>
+        <p class="lede">Помогаем педагогам замечать личные и лишние сведения в запросах к ИИ и сохранять суть задачи после обезличивания.</p>
+      </div>
+      <aside class="about-local">
+        <span class="about-local-title">Локальная проверка</span>
+        <p>Текст разбирается в браузере и не отправляется на сервер. Внешний ИИ не используется.</p>
+      </aside>
+    </div>
+    <section class="about-engine" aria-labelledby="engineTitle">
+      <div class="about-section-heading">
+        <h2 id="engineTitle">Как устроена проверка</h2>
+        <p>Правила и локальная языковая модель отмечают разные виды риска.</p>
+      </div>
+      <div class="about-engine-copy">
+        <p>Правила находят контакты, документы, адреса, секреты, школу и класс, здоровье и семью. Уровень риска определяется сочетанием сведений, без числовых баллов.</p>
+        <p>Имена, организации и места дополнительно ищет Slovnet NER проекта Natasha (лицензия MIT). Модель работает на устройстве и загружается один раз (около 9 МБ). На разговорном тексте и редких именах она ошибается чаще.</p>
+      </div>
+    </section>
+    <section class="about-criteria" aria-labelledby="criteriaTitle">
+      <div class="about-section-heading">
+        <h2 id="criteriaTitle">На что обращает внимание методика</h2>
+        <p>Восемь критериев помогают оценить не только отдельные слова, но и контекст.</p>
+      </div>
+      <dl id="crit">
+        <div><dt>C1. Прямые идентификаторы</dt><dd>Имя, телефон, адрес, документ, почта, ник.</dd></div>
+        <div><dt>C2. Косвенная идентификация</dt><dd>Школа, класс, населённый пункт, редкое обстоятельство.</dd></div>
+        <div><dt>C3. Здоровье и психология</dt><dd>Диагноз, состояние, запрос оценить здоровье.</dd></div>
+        <div><dt>C4. Семья и социальное положение</dt><dd>Состав семьи, работа родителей, бытовые подробности.</dd></div>
+        <div><dt>C5. Избыточность данных</dt><dd>Сведения, без которых задачу всё равно можно поставить.</dd></div>
+        <div><dt>C6. Внешний сервис</dt><dd>Куда уходит запрос. Это организационный вопрос, его не закрывает автоматическая проверка.</dd></div>
+        <div><dt>C7. Защита информации</dt><dd>Пароли, ключи, закрытые материалы, коды из сообщений.</dd></div>
+        <div><dt>C8. Ответ ИИ о человеке</dt><dd>Просьба поставить диагноз или принять решение о конкретном человеке.</dd></div>
+      </dl>
+    </section>
+    <section class="about-privacy" aria-labelledby="privacyTitle">
+      <div>
+        <h2 id="privacyTitle">Ваш текст остаётся у вас</h2>
+        <p>Приложение не использует cookies, localStorage и аналитику. Для офлайн-режима кэшируются только файлы самого приложения.</p>
+        <p>Проверить это можно во вкладке «Сеть» инструментов разработчика: при нажатии «Проверить» запрос с текстом не отправляется. Код открыт, автотест проверяет отсутствие сетевых и storage-вызовов.</p>
+      </div>
+    </section>
   </div>
 </section>
 </main>
-<footer class="footer">
-  <div class="back">
-    <div>
-      <span class="gl gl-f"><i class="gl-m" aria-hidden="true"></i><span class="gl-t">ГрОИРО</span></span><p class="sign">Проверьте до отправки</p>
-      <p>Образовательный проект. Результат проверки не является гарантией безопасности.</p>
-    </div>
-    <div class="back-links">
-      <button data-page="analyzer" type="button">Анализатор</button>
-      <button data-page="trainer" type="button">Тренажёр</button>
-      <button data-page="method" type="button">Методика</button>
-      <button data-page="about" type="button">Приватность</button>
-    </div>
-  </div>
-  <p class="imprint">Версия правил 1.7 · сверка 4 ноября 2026, частично. Снимки: «Summer empty classroom, blackboard and flowers on tables, 2023», AKA MBG, CC0; «Classroom with chairs and blackboard at Cornell University», Tomwsulcer, CC0; «Blackboards – UNM Astrophysics», Anthony J. Bentley, общественное достояние; «Notebook writing», Jairus Monilla, общественное достояние; «Writing with fountain pen», Wasiul Bahar, CC BY-SA 4.0. Wikimedia Commons.</p>
-</footer>
 <div class="toast-wrap" id="tw" role="status"></div>
 <script src="assets/vendor/jszip.min.js"></script>
 <script src="assets/rules.js"></script>

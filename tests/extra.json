@@ -49,6 +49,18 @@
   ]
  },
  {
+  "text": "Вот пароль к школьному кабинету: qwerty-Example-2026! Помоги написать инструкцию для коллег.",
+  "flag": true,
+  "cats": [
+   "C7"
+  ]
+ },
+ {
+  "text": "Объясни, что означает выражение password for online school account.",
+  "flag": false,
+  "cats": []
+ },
+ {
   "text": "Паспорт MC1234567, личный номер 3140585A012PB4",
   "flag": true,
   "cats": [

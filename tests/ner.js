@@ -22,13 +22,18 @@ if (hit / tot < 0.9) {
   console.error('Совпадение ниже 90%');
   process.exit(1);
 }
-const kept = ref.reduce((n, r) => n + r.spans.filter((s) => NER.findings(r.text).some((f) => f.s === s[0] && f.e === s[1])).length, 0);
+const kept = ref.reduce(
+  (n, r) => n + r.spans.filter((s) => NER.findings(r.text).some((f) => f.s === s[0] && f.e === s[1])).length,
+  0
+);
 const leaked = [];
 for (const r of ref)
   for (const f of NER.findings(r.text)) {
     const w = f.txt.split(/\s+/)[0].toLowerCase();
     if (
-      'составь объясни напиши подготовь позвони сравни реши сделай расскажи передай передайте загрузи отправь вставь'.split(' ').includes(w)
+      'составь объясни напиши подготовь позвони сравни реши сделай расскажи передай передайте загрузи отправь вставь'
+        .split(' ')
+        .includes(w)
     )
       leaked.push(f.txt);
   }
